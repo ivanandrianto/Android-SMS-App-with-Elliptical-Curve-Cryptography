@@ -12,15 +12,14 @@ import com.chibi48.sms.model.Message;
 import java.util.ArrayList;
 
 /**
- * Created by ivan on 11/29/16.
+ * Created by ivan on 11/30/16.
  */
 
-public class SMSListAdapter extends BaseAdapter {
-
+public class SMSConversationAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Message> messages;
 
-    public SMSListAdapter(Context context, ArrayList<Message> messages) {
+    public SMSConversationAdapter(Context context, ArrayList<Message> messages) {
         super();
         this.context = context;
         this.messages = messages;
@@ -33,22 +32,25 @@ public class SMSListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        int messageType = messages.get(position).getType();
+
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).
-                    inflate(R.layout.message_list_row, parent, false);
+            if (messageType == 1) {
+                convertView = LayoutInflater.from(context).
+                        inflate(R.layout.list_item_message_left, parent, false);
+            } else {
+                convertView = LayoutInflater.from(context).
+                        inflate(R.layout.list_item_message_right, parent, false);
+            }
         }
 
-        TextView textViewAddress = (TextView)convertView.findViewById(R.id.address);
-        TextView textViewBody = (TextView)convertView.findViewById(R.id.body);
-        TextView textViewDate = (TextView)convertView.findViewById(R.id.date);
-        TextView textThreadId = (TextView)convertView.findViewById(R.id.threadId);
+        TextView textViewTime = (TextView)convertView.findViewById(R.id.messageTime);
+        TextView textViewBody = (TextView)convertView.findViewById(R.id.message_text);
 
         String dateStr = messages.get(position).getDate().toString();
         String[] dateStrSplit = dateStr.split(" ");
-        textViewAddress.setText(messages.get(position).getAddress());
+        textViewTime.setText(dateStrSplit[1] + " " + dateStrSplit[2] + " " + dateStrSplit[3]);
         textViewBody.setText(messages.get(position).getBody());
-        textViewDate.setText(dateStrSplit[1] + " " + dateStrSplit[2] + " " + dateStrSplit[3]);
-        textThreadId.setText(String.valueOf(messages.get(position).getThreadId()));
 
         return convertView;
     }
@@ -62,5 +64,4 @@ public class SMSListAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
 }

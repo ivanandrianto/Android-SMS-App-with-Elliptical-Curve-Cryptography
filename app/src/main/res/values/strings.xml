@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SMS</string>
+    <string name="encrypt_on">On</string>
+    <string name="encrypt_off">Off</string>
 </resources>

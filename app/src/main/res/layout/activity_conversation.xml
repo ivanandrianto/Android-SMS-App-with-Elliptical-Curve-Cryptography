@@ -22,20 +22,31 @@
             android:id="@+id/toolbar_title"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="New Message"
             android:layout_gravity="left" />
 
     </android.support.v7.widget.Toolbar>
 
-    <EditText
-        android:id="@+id/editTextPhoneNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/list_view_container"
         android:layout_below="@+id/toolbar"
-        android:background="@color/accent"
-        android:textColor="@color/textLight"/>
+        android:layout_above="@+id/messageTextContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bg_dark"
+        android:orientation="vertical" >
+
+        <ListView android:id="@+id/list"
+            android:cacheColorHint="#00000000"
+            android:drawSelectorOnTop="false"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:listSelector="@android:color/transparent" />
+
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/messageTextContainer"
         android:background="@color/accent"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
@@ -56,15 +67,40 @@
             android:padding="5dip"
             android:textColor="@color/textLight" />
 
-        <ImageButton
-            android:id="@+id/imageButtonSend"
-            android:background="@drawable/send_message"
-            android:layout_gravity="center_vertical"
+        <RelativeLayout
             android:layout_alignParentRight="true"
-            android:layout_height="50dp"
-            android:layout_weight="0.13"
             android:layout_width="50dp"
-            android:onClick="sendSMS" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <ToggleButton
+                android:id="@+id/encryptToggle"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="@string/encrypt_on"
+                android:textOff="@string/encrypt_off"
+                android:padding="5dp"
+                android:checked="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/encryptToggle">
+
+                <ImageButton
+                    android:id="@+id/imageButtonSend"
+                    android:background="@drawable/send_message"
+                    android:layout_below="@+id/encryptToogle"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.13"
+                    android:layout_width="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="sendSMS" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

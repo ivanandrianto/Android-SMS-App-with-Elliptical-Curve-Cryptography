@@ -11,7 +11,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/toolbar"
-        android:background="@color/colorPrimary"
+        android:background="@color/primary"
         android:layout_alignParentTop="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/colorDarkBg"
+        android:background="@color/bg_dark"
         android:orientation="vertical" >
 
         <ListView android:id="@+id/list"

@@ -30,7 +30,7 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listViewSMS;
+    private ListView listViewSMS;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3) {
                 TextView threadId = (TextView)v.findViewById(R.id.threadId);
+                TextView address = (TextView)v.findViewById(R.id.address);
                 System.out.println("Clicked thread id: " + threadId.getText().toString());
+
+                Intent intent = new Intent(getBaseContext(), ConversationActivity.class);
+                intent.putExtra("THREAD_ID", Integer.parseInt(threadId.getText().toString()));
+                intent.putExtra("ADDRESS", address.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -89,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 Date date = new Date(cursor.getLong(cursor.getColumnIndex("date")));
                 Date dateSent = new Date(cursor.getLong(cursor.getColumnIndex("date_sent")));
                 Message message = new Message(id, threadId, address, person, date, dateSent, type, body);
+                System.out.println(message);
                 messages.add(message);
 
             } while (cursor.moveToNext());
@@ -130,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     class MessageDateComparator implements Comparator<Message> {
         public int compare(Message msg1, Message msg2) {
-            return msg2.getActualDate().compareTo(msg1.getActualDate());
+            return msg2.getDate().compareTo(msg1.getDate());
         }
     }
 
@@ -147,4 +154,5 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(lastMessages, new MessageDateComparator());
         return lastMessages;
     }
+
 }

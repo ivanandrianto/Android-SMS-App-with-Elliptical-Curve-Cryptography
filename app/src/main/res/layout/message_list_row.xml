@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorDarkBg" >
+    android:background="@color/bg_dark" >
 
     <ImageView
         android:id="@+id/image"
@@ -22,7 +22,7 @@
         android:layout_toRightOf="@+id/image"
         android:maxLines="1"
         android:text="title"
-        android:textColor="@color/colorText"
+        android:textColor="@color/textLight"
         android:textSize="15dip"
         android:textStyle="bold" />
 
@@ -34,17 +34,17 @@
         android:layout_toRightOf="@+id/image"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textColor="@color/colorText"
+        android:textColor="@color/textLight"
         android:textSize="13dip" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="@color/colorText"
+        android:layout_alignParentRight="@color/textLight"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dip"
-        android:textColor="@color/colorText"
+        android:textColor="@color/textLight"
         android:textSize="12dip" />
 
     <TextView

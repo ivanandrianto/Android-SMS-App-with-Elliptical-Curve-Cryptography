@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorDarkBg">#454545</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorBg">#e161b6</color>
-    <color name="colorText">#FFFFFF</color>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="bg_dark">#454545</color>
+    <color name="accent">#FF4081</color>
+    <color name="bg">#e161b6</color>
+    <color name="bg_msg_from">#a18207</color>
+    <color name="bg_msg_me">#07a111</color>
+    <color name="textLight">#FFFFFF</color>
+    <color name="textDark">#646464</color>
 </resources>

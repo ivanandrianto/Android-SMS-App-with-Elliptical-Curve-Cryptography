@@ -58,14 +58,6 @@ public class Message {
     public void setType(int type) { this.type = type; }
     public int getType() { return type; }
 
-    public Date getActualDate() {
-        if (type == 1) {
-            return dateSent;
-        } else {
-            return date;
-        }
-    }
-
     @Override
     public String toString() {
         return "Message [id=" + id + ", thread_id=" + threadId + ", address=" + address +
