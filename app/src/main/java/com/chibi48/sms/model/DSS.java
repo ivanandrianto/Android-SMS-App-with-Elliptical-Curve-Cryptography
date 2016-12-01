@@ -1,8 +1,6 @@
 package com.chibi48.sms.model;
 
 import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 /**
@@ -47,15 +45,6 @@ public class DSS {
             z[i] = (byte)st.charAt(i);
         return new BigInteger(z);
     }
-    public BigInteger hashMessage(String message) throws NoSuchAlgorithmException{
-        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-        byte[] result = mDigest.digest(message.getBytes());
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < result.length; i++) {
-            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        return(stringToBig(sb.toString()));
-    }
 
     public long generateG(){
         long power = (p)/q;
@@ -72,30 +61,34 @@ public class DSS {
         return Tes.longValue();
     }
 
-    public String generateSigning(long privateX, String message) throws NoSuchAlgorithmException{
+    public String generateSigning(long privateX, String message){
         BigInteger r = BigInteger.valueOf(generateG());
         BigInteger kRandom = randomBigInteger(BigInteger.valueOf(q-1));
         r = r.modPow(kRandom, BigInteger.valueOf(p)).mod(BigInteger.valueOf(q));
 
+        SHA sha = new SHA();
 
-        BigInteger s = hashMessage(message);
+        BigInteger s = stringToBig(sha.hash(message));
         BigInteger kk = kRandom.modInverse(BigInteger.valueOf(q));
         s = s.add(BigInteger.valueOf(privateX).multiply(r)).multiply(kk).mod(BigInteger.valueOf(q));
 
-        String ret =message + "\n----" + getString(r) + "\n----" + getString(s);
+        String ret = message + "\n----" + getString(r) + "\n----" + getString(s);
+
+
         return ret;
 
     }
 
-    public boolean verifySigning(String message, long publicX) throws NoSuchAlgorithmException{
+    public boolean verifySigning(String message, long publicX){
         String[] arrMessage = message.split("\n----");
 
         BigInteger r = stringToBig(arrMessage[1]);
         BigInteger w = stringToBig(arrMessage[2]);
         w = w.modInverse(BigInteger.valueOf(q));
 
+        SHA sha = new SHA();
 
-        BigInteger u1 = hashMessage(arrMessage[0]).multiply(w).mod(BigInteger.valueOf(q));
+        BigInteger u1 = stringToBig(sha.hash(arrMessage[0])).multiply(w).mod(BigInteger.valueOf(q));
         BigInteger u2 = r.multiply(w).mod(BigInteger.valueOf(q));
 
         BigInteger g = BigInteger.valueOf(generateG());
@@ -103,6 +96,7 @@ public class DSS {
 
         BigInteger v = g.pow(u1.intValue()).multiply(y.pow(u2.intValue()));
         v = v.mod(BigInteger.valueOf(p)).mod(BigInteger.valueOf(q));
+
         return (v.equals(r));
     }
 
