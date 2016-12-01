@@ -2,7 +2,7 @@ package com.chibi48.sms.model;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import javax.xml.bind.DatatypeConverter;
+//import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -167,7 +167,9 @@ public class SHA {
             res = res.xor(stringToBig(result.get(1)));
         }
 
-        String hasil = DatatypeConverter.printHexBinary(getString(res).getBytes());
+//        String hasil = DatatypeConverter.printHexBinary(getString(res).getBytes());
+        String hasil = org.apache.commons.codec.binary.Hex.encodeHex(getString(res).getBytes())
+                .toString();
         return hasil.toLowerCase();
     }
 }

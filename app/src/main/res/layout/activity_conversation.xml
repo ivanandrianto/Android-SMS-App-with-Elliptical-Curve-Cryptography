@@ -115,7 +115,7 @@
                 android:checked="true" />
 
             <ImageButton
-                android:id="@+id/imageButtonSend"
+                android:id="@+id/button_send"
                 android:background="@drawable/send_message"
                 android:layout_below="@+id/signatureToggle"
                 android:layout_height="50dp"
