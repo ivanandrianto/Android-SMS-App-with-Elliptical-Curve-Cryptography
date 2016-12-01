@@ -1,5 +1,6 @@
 package com.chibi48.sms;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -25,9 +26,11 @@ public class ConversationActivity extends AppCompatActivity {
     private int threadId;
     private String address;
     private boolean encryptOn;
+    private boolean signatureOn;
     private EditText content;
     private ListView listViewSMS;
     private ToggleButton encryptToggle;
+    private ToggleButton signatureToggle;
     private SMSConversationAdapter adapter;
 
     @Override
@@ -39,9 +42,8 @@ public class ConversationActivity extends AppCompatActivity {
         address = getIntent().getExtras().get("ADDRESS").toString();
 
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
-        System.out.println("ADDRESSSSSSSSS" + address);
         toolbarTitle.setText(address);
-        content = (EditText) findViewById(R.id.message_text);
+        content = (EditText) findViewById(R.id.message_body);
 
         // Get messages
         ArrayList<Message> messages = readMessageOfThisConversation();
@@ -55,8 +57,13 @@ public class ConversationActivity extends AppCompatActivity {
         listViewSMS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
-                TextView threadId = (TextView)v.findViewById(R.id.threadId);
-                System.out.println("Clicked thread id: " + threadId.getText().toString());
+                TextView textViewBody = (TextView)v.findViewById(R.id.message_body);
+                System.out.println(textViewBody.getText().toString());
+
+                Intent intent = new Intent(getBaseContext(), DecryptActivity.class);
+                intent.putExtra("MESSAGE_BODY", textViewBody.getText().toString());
+                startActivity(intent);
+
             }
         });
         listViewSMS.setTranscriptMode(ListView.TRANSCRIPT_MODE_NORMAL);
@@ -69,10 +76,20 @@ public class ConversationActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     encryptOn = true;
-                    System.out.println("-----------CHECKED------------");
                 } else {
                     encryptOn = false;
-                    System.out.println("-----------NOT CHECKED------------");
+                }
+            }
+        });
+
+        signatureToggle = (ToggleButton) findViewById(R.id.signatureToggle);
+        signatureOn = true;
+        signatureToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    signatureOn = true;
+                } else {
+                    signatureOn = false;
                 }
             }
         });
@@ -124,7 +141,6 @@ public class ConversationActivity extends AppCompatActivity {
         listViewSMS.post(new Runnable() {
             @Override
             public void run() {
-                // Select the last row so it will scroll into view...
                 listViewSMS.setSelection(adapter.getCount() - 1);
             }
         });

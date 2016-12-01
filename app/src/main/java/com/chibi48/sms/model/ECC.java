@@ -4,7 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.DatatypeConverter;
+//import javax.xml.bind.DatatypeConverter;
+import android.util.Base64;
+
+import org.apache.commons.codec.DecoderException;
 
 /**
  *
@@ -84,11 +87,14 @@ public class ECC {
             encryptedText += getString(encryptedPair.B.x);
             encryptedText += getString(encryptedPair.B.y);
         }
-        return DatatypeConverter.printHexBinary(encryptedText.getBytes());
+        return encryptedText;
+//        return org.apache.commons.codec.binary.Hex.encodeHex(encryptedText.getBytes()).toString();
+//        return DatatypeConverter.printHexBinary(encryptedText.getBytes());
     }
 
-    public String decryptString(String cipherteks){
-        cipherteks = new String(DatatypeConverter.parseHexBinary(cipherteks));
+    public String decryptString(String cipherteks) throws DecoderException {
+//        cipherteks = org.apache.commons.codec.binary.Hex.decodeHex(cipherteks.toCharArray()).toString();
+//        cipherteks = new String(DatatypeConverter.parseHexBinary(cipherteks));
         List<String> strings = new ArrayList<String>();
         int index = 0;
         while (index < cipherteks.length()) {

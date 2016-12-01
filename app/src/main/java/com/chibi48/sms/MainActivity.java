@@ -7,14 +7,19 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.chibi48.sms.model.ECC;
 import com.chibi48.sms.model.Message;
 
+import org.apache.commons.codec.DecoderException;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,12 +43,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Messaging App");
 
+        ECC ecc = new ECC();
+
+        try {
+            Log.d("encrypt",ecc.encryptString("abcd"));
+            System.out.println("------------ENCRYPT---------------" + ecc.encryptString("abcd"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Log.d("decrypt",ecc.decryptString(ecc.encryptString("abcd")));
+            System.out.println("------------DECRYPT---------------" + ecc.decryptString(ecc.encryptString("abcd")));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (DecoderException e) {
+            e.printStackTrace();
+        }
+
+
         // Read messages
         ArrayList<Message> messages = readMessage();
         HashMap<Integer, ArrayList<Message>> groupedMessages = groupMessage(messages);
         sortMessages(groupedMessages);
         ArrayList<Message> lastMessages = getLastMessageFromEachThread(groupedMessages);
-        System.out.println(lastMessages);
 
         // set list view adapter
         listViewSMS = (ListView)findViewById(R.id.list);
@@ -52,14 +75,13 @@ public class MainActivity extends AppCompatActivity {
         listViewSMS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3) {
-                TextView threadId = (TextView)v.findViewById(R.id.threadId);
-                TextView address = (TextView)v.findViewById(R.id.address);
-                System.out.println("Clicked thread id: " + threadId.getText().toString());
+            TextView threadId = (TextView)v.findViewById(R.id.threadId);
+            TextView address = (TextView)v.findViewById(R.id.address);
 
-                Intent intent = new Intent(getBaseContext(), ConversationActivity.class);
-                intent.putExtra("THREAD_ID", Integer.parseInt(threadId.getText().toString()));
-                intent.putExtra("ADDRESS", address.getText().toString());
-                startActivity(intent);
+            Intent intent = new Intent(getBaseContext(), ConversationActivity.class);
+            intent.putExtra("THREAD_ID", Integer.parseInt(threadId.getText().toString()));
+            intent.putExtra("ADDRESS", address.getText().toString());
+            startActivity(intent);
             }
         });
 
@@ -95,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                 Date date = new Date(cursor.getLong(cursor.getColumnIndex("date")));
                 Date dateSent = new Date(cursor.getLong(cursor.getColumnIndex("date_sent")));
                 Message message = new Message(id, threadId, address, person, date, dateSent, type, body);
-                System.out.println(message);
                 messages.add(message);
 
             } while (cursor.moveToNext());

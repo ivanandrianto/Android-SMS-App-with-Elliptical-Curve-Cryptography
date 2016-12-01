@@ -22,7 +22,7 @@ public class NewMessageActivity extends AppCompatActivity {
         setTitle("New Message");
 
         phoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
-        content = (EditText) findViewById(R.id.message_text);
+        content = (EditText) findViewById(R.id.message_body);
         sendButton = (ImageButton) findViewById(R.id.imageButtonSend);
 
     }

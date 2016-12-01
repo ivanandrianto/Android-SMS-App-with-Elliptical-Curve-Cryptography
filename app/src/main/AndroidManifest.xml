@@ -23,7 +23,8 @@
         <activity android:name=".ReadActivity" />
         <activity android:name=".NewMessageActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".ConversationActivity"></activity>
+        <activity android:name=".ConversationActivity" />
+        <activity android:name=".DecryptActivity"></activity>
     </application>
 
 </manifest>

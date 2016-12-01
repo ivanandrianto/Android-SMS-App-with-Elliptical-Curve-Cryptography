@@ -44,7 +44,7 @@
         android:padding="5dip">
 
         <EditText
-            android:id="@+id/message_text"
+            android:id="@+id/message_body"
             android:background="@color/primary_dark"
             android:gravity="top"
             android:layout_alignParentBottom="true"

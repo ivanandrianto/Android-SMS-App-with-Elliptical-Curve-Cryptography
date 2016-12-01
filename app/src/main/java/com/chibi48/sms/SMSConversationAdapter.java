@@ -44,8 +44,8 @@ public class SMSConversationAdapter extends BaseAdapter {
             }
         }
 
-        TextView textViewTime = (TextView)convertView.findViewById(R.id.messageTime);
-        TextView textViewBody = (TextView)convertView.findViewById(R.id.message_text);
+        TextView textViewTime = (TextView)convertView.findViewById(R.id.message_date);
+        TextView textViewBody = (TextView)convertView.findViewById(R.id.message_body);
 
         String dateStr = messages.get(position).getDate().toString();
         String[] dateStrSplit = dateStr.split(" ");

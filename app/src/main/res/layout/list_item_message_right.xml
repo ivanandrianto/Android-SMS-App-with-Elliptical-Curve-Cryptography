@@ -9,7 +9,7 @@
     android:paddingTop="5dp" >
 
     <TextView
-        android:id="@+id/messageTime"
+        android:id="@+id/message_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
@@ -18,7 +18,7 @@
         android:textStyle="italic" />
 
     <TextView
-        android:id="@+id/message_text"
+        android:id="@+id/message_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
