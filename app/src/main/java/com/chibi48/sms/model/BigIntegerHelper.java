@@ -1,4 +1,7 @@
 package com.chibi48.sms.model;
+
+import java.math.BigInteger;
+
 /**
  *
  * @author ivan
