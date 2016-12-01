@@ -1,15 +1,15 @@
 package com.chibi48.sms;
 
-import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Messaging App");
+
+        
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String publicKey = prefs.getString("public_key", null);
+        System.out.println("_-------------------PUBLIC KEY-------------------:" + publicKey);
 
         ECC ecc = new ECC();
 
@@ -94,10 +99,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.newMsgButton:
+            case R.id.button_new_msg:
                 Intent composeIntent = new Intent();
                 composeIntent.setClass(this, NewMessageActivity.class);
                 startActivity(composeIntent);
+                break;
+            case R.id.button_settings:
+                Intent settingIntent = new Intent();
+                settingIntent.setClass(this, SettingsActivity.class);
+                startActivity(settingIntent);
                 break;
         }
     }

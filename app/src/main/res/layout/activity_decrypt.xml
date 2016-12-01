@@ -51,6 +51,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp" />
 
+        <TextView
+            android:id="@+id/signature_verification"
+            android:layout_below="@+id/decrypted_message_body"
+            android:background="@color/accent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -89,13 +97,13 @@
             android:layout_gravity="center_vertical">
 
             <ImageButton
-                android:id="@+id/imageButtonSend"
+                android:id="@+id/button_decrypt"
                 android:background="@drawable/decrypt"
                 android:layout_below="@+id/signatureToggle"
                 android:layout_height="50dp"
                 android:layout_width="50dp"
                 android:layout_gravity="center_vertical"
-                android:onClick="sendSMS" />
+                android:onClick="decrypt" />
 
             <LinearLayout
                 android:layout_width="match_parent"

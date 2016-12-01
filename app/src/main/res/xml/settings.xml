@@ -1,38 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="General Settings">
+    <PreferenceCategory
+        android:title="General Settings"
+        android:key="general_settings">
 
-        <CheckBoxPreference android:key="full_sms"
-            android:title="Full SMS"
-            android:summary="Show full SMS message"
-            android:defaultValue="true" />
+        <EditTextPreference android:key="public_key"
+            android:title="Public key"
+            android:summary="Enter public key"
+            android:defaultValue="abcdefg" />
 
-        <ListPreference android:key="default_sort"
-            android:title="Sort Order"
-            android:summary="Date Descending"
-            android:entries="@array/sort_opts_arr"
-            android:entryValues="@array/val_arr"
-            android:defaultValue="3" />
-
-        <CheckBoxPreference android:key="time_format"
-            android:title="Time Format"
-            android:summary="Use 24-hour format"
-            android:defaultValue="false" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Advanced Settings">
-
-        <CheckBoxPreference android:key="confirm_pref"
-            android:title="Ask for Confirmation"
-            android:summary="Show confirmation dialog"
-            android:defaultValue="true" />
-
-        <CheckBoxPreference android:key="use_default"
-            android:title="Use System App"
-            android:summary="Application for sending SMS"
-            android:defaultValue="true" />
+        <EditTextPreference android:key="private_key"
+            android:title="Private key"
+            android:summary="Enter private key" />
 
     </PreferenceCategory>
 

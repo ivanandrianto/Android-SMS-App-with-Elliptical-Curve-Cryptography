@@ -63,7 +63,6 @@ public class ConversationActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), DecryptActivity.class);
                 intent.putExtra("MESSAGE_BODY", textViewBody.getText().toString());
                 startActivity(intent);
-
             }
         });
         listViewSMS.setTranscriptMode(ListView.TRANSCRIPT_MODE_NORMAL);
@@ -128,7 +127,7 @@ public class ConversationActivity extends AppCompatActivity {
 
     public void sendSMS(View v) {
         switch (v.getId()) {
-            case R.id.imageButtonSend:
+            case R.id.button_send:
                 String to = address;
                 String msg = content.getText().toString();
                 SmsManager manager = SmsManager.getDefault();

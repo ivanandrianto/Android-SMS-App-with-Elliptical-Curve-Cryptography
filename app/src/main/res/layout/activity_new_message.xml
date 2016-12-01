@@ -57,7 +57,7 @@
             android:textColor="@color/textLight" />
 
         <ImageButton
-            android:id="@+id/imageButtonSend"
+            android:id="@+id/button_send"
             android:background="@drawable/send_message"
             android:layout_gravity="center_vertical"
             android:layout_alignParentRight="true"

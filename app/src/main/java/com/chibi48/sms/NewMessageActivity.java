@@ -23,13 +23,13 @@ public class NewMessageActivity extends AppCompatActivity {
 
         phoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
         content = (EditText) findViewById(R.id.message_body);
-        sendButton = (ImageButton) findViewById(R.id.imageButtonSend);
+        sendButton = (ImageButton) findViewById(R.id.button_send);
 
     }
 
     public void sendSMS(View v) {
         switch (v.getId()) {
-            case R.id.imageButtonSend:
+            case R.id.button_send:
                 String to = phoneNumber.getText().toString();
                 String msg = content.getText().toString();
                 SmsManager manager = SmsManager.getDefault();
