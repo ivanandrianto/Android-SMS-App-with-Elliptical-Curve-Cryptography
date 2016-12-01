@@ -6,12 +6,14 @@ import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import com.chibi48.sms.model.DSS;
 
 public class NewMessageActivity extends AppCompatActivity {
 
     private EditText phoneNumber;
     private EditText content;
     private ImageButton sendButton;
+    private DSS dss;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
